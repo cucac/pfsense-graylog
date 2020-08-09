@@ -1,0 +1,535 @@
+{
+  "v": 1,
+  "id": "69aa335c-cec1-4427-8bb1-721fb1ee91e0",
+  "rev": 1,
+  "name": "cucac_grok_pattern",
+  "summary": "grok pattern",
+  "description": "grok pattern",
+  "vendor": "cucac",
+  "url": "https://github.com/cucac/pfsense-graylog",
+  "parameters": [],
+  "entities": [
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "61d939d2-9167-44a6-9328-f896d6425d50",
+      "data": {
+        "name": "PFSENSE_APP",
+        "pattern": "\t(%{DATA:pfsense_APP}):"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "ce6f803a-8240-4488-98f5-84f6707eab2f",
+      "data": {
+        "name": "PFSENSE_UDP_DATA",
+        "pattern": "%{INT:src_port},%{INT:dest_port},%{INT:data_length}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "47a35759-0741-4a36-943d-50911bd25cef",
+      "data": {
+        "name": "PFSENSE_APP_LOGIN",
+        "pattern": "(%{DATA:pfsense_ACTION}) for user \\'(%{DATA:pfsense_USER})\\' from: (%{GREEDYDATA:pfsense_REMOTE_IP})"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "3798076b-bdf6-4308-88c5-78da7cb3e018",
+      "data": {
+        "name": "PFSENSE_NGINX",
+        "pattern": "%{SYSLOGHOST:hostname} %{DATA:pfsense_service}: %{IPORHOST:remote_addr} - (%{DATA:remote_user} )?- \\[%{HTTPDATE:access_time}\\] \\\"%{WORD:request_verb} %{DATA:request_path} HTTP/%{NUMBER:http_version}\\\" %{NUMBER:response_code} %{NUMBER:response_bytes} \\\"%{DATA:http_referer}\\\" \\\"%{DATA:http_user_agent}\\\""
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "7628feb1-aeb7-41bb-b633-d2ca815faa3d",
+      "data": {
+        "name": "PFSENSE_APP_DATA",
+        "pattern": "(%{PFSENSE_APP_LOGOUT}|%{PFSENSE_APP_LOGIN}|%{PFSENSE_APP_ERROR}|%{PFSENSE_APP_GEN})"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "bb9070fe-a4c7-4df3-84f3-2b9a61b78280",
+      "data": {
+        "name": "PFSENSE_IPv6_SPECIFIC_DATA",
+        "pattern": "(?<ip_ver>(6)),%{BASE16NUM:ipv6_Flag1},%{WORD:ipv6_Flag2},%{WORD:flow_label},%{WORD:options},%{INT:protocol_id},%{INT:length},%{IPV6:src_ip},%{IPV6:dest_ip},%{WORD:ipv6_HPH},%{WORD:ipv6_padn},%{WORD:ipv6_Alert},%{WORD:ipv6_Flag3},%{WORD:ipv6_Flag4}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "988e77f8-878a-457d-a7b0-1b6fa8b28410",
+      "data": {
+        "name": "PFSENSE_PROTOCOL_DATA",
+        "pattern": "%{PFSENSE_TCP_DATA}|%{PFSENSE_UDP_DATA}|%{PFSENSE_ICMP_DATA}|%{PFSENSE_CARP_DATA}|%{PFSENSE_IGMP_DATA}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "19a4a6a5-e1aa-4d41-b196-252993d4bd1d",
+      "data": {
+        "name": "PFSENSE_ICMP_DATA",
+        "pattern": "%{PFSENSE_ICMP_TYPE}%{PFSENSE_ICMP_RESPONSE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "483b60ab-056a-4b7d-a427-f79d41a9de91",
+      "data": {
+        "name": "PFSENSE_IP_DATA",
+        "pattern": "%{INT:length},%{IP:src_ip},%{IP:dest_ip},"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "0fcc7150-629e-4f24-917c-f79651638e6f",
+      "data": {
+        "name": "PFSENSE_IPv4_SPECIFIC_DATA_ECN",
+        "pattern": "(?<ip_ver>(4)),%{BASE16NUM:tos},%{INT:ecn},%{INT:ttl},%{INT:id},%{INT:offset},%{WORD:flags},%{INT:proto_id},%{WORD:proto},"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "066afbb5-ca9b-49c8-b4f4-e84b3628f83b",
+      "data": {
+        "name": "PFSENSE_LOG_DATA",
+        "pattern": "%{INT:rule},%{INT:sub_rule}?,,%{INT:tracker},%{GREEDYDATA:iface},%{WORD:reason},%{WORD:action},%{WORD:direction},"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "05439fa7-98c5-4458-938f-ca0e5d5fb499",
+      "data": {
+        "name": "PFSENSE_ICMP_UNREACHABLE",
+        "pattern": "%{GREEDYDATA:icmp_unreachable}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "c5689e34-d639-4810-ae16-0306b755fbbd",
+      "data": {
+        "name": "PFSENSE_APP_ERROR",
+        "pattern": "webConfigurator (%{DATA:pfsense_ACTION}) for \\'(%{DATA:pfsense_USER})\\' from (%{GREEDYDATA:pfsense_REMOTE_IP})"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "c108d11a-ccd1-4547-aa43-3e88d091af17",
+      "data": {
+        "name": "PFSENSE_ICMP_UNREACHPORT",
+        "pattern": "%{IP:icmp_unreachport_dest_ip},%{WORD:icmp_unreachport_protocol},%{INT:icmp_unreachport_port}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "64e66219-9fd3-4754-9eaa-a15ed0886593",
+      "data": {
+        "name": "PFSENSE_ICMP_RESPONSE",
+        "pattern": "%{PFSENSE_ICMP_ECHO_REQ_REPLY}|%{PFSENSE_ICMP_UNREACHPORT}| %{PFSENSE_ICMP_UNREACHPROTO}|%{PFSENSE_ICMP_UNREACHABLE}|%{PFSENSE_ICMP_NEED_FLAG}|%{PFSENSE_ICMP_TSTAMP}|%{PFSENSE_ICMP_TSTAMP_REPLY}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "03801219-1f08-4b64-8f42-de82d7e3be50",
+      "data": {
+        "name": "PFSENSE_ICMP_UNREACHPROTO",
+        "pattern": "%{IP:icmp_unreach_dest_ip},%{WORD:icmp_unreachproto_protocol}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "30df8405-9e0e-4b8d-89ee-c944ca3342a4",
+      "data": {
+        "name": "PFSENSE_APP_GEN",
+        "pattern": "(%{GREEDYDATA:pfsense_ACTION})"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "5da2be2a-3e29-4128-8e0b-916bafe47b8a",
+      "data": {
+        "name": "PFSENSE_CARP_DATA",
+        "pattern": "%{WORD:carp_type},%{INT:carp_ttl},%{INT:carp_vhid},%{INT:carp_version},%{INT:carp_advbase},%{INT:carp_advskew}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "ee01084f-6f17-4211-8194-829fad8a223a",
+      "data": {
+        "name": "PFSENSE_IGMP_DATA",
+        "pattern": "datalength=%{INT:data_length}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "f7bd67d2-4ecc-4bc9-ae9d-5c81928817a1",
+      "data": {
+        "name": "PFSENSE_ICMP_TSTAMP",
+        "pattern": "%{INT:icmp_tstamp_id},%{INT:icmp_tstamp_sequence}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "b138650a-73d1-49d9-b2fd-d3548b9febb4",
+      "data": {
+        "name": "PFSENSE_ICMP_ECHO_REQ_REPLY",
+        "pattern": "%{INT:icmp_echo_id},%{INT:icmp_echo_sequence}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "eab33cf3-4319-4a50-98e8-bb5ea49b7077",
+      "data": {
+        "name": "PFSENSE_ICMP_TYPE",
+        "pattern": "(?<icmp_type>(request|reply|unreachproto|unreachport|unreach|timeexceed|paramprob|redirect|maskreply|needfrag|tstamp|tstampreply)),"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "2710b097-28e3-459f-9747-848a2d2a423b",
+      "data": {
+        "name": "PFSENSE_ICMP_NEED_FLAG",
+        "pattern": "%{IP:icmp_need_flag_ip},%{INT:icmp_need_flag_mtu}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "78aa845a-0b55-47a8-92de-2a04e1543707",
+      "data": {
+        "name": "PFSENSE_LOG_ENTRY",
+        "pattern": "%{PFSENSE_LOG_DATA}%{PFSENSE_IP_SPECIFIC_DATA}%{PFSENSE_IP_DATA}%{PFSENSE_PROTOCOL_DATA}?"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "14961a7a-e55b-4a09-b0c2-f9fdf801ab8d",
+      "data": {
+        "name": "PFSENSE_APP_LOGOUT",
+        "pattern": "User (%{DATA:pfsense_ACTION}) for user \\'(%{DATA:pfsense_USER})\\' from: (%{GREEDYDATA:pfsense_REMOTE_IP})"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "a5fdf8f4-5287-4107-87de-63951ef644a1",
+      "data": {
+        "name": "PFSENSE_IPv4_SPECIFIC_DATA",
+        "pattern": "(?<ip_ver>(4)),%{BASE16NUM:tos},%{WORD:ecn}?,%{INT:ttl},%{INT:id},%{INT:offset},%{WORD:flags},%{INT:proto_id},%{WORD:proto},"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "ce4e82fa-a51e-4f36-8f3e-b2c698ba7926",
+      "data": {
+        "name": "PFSENSE_IP_SPECIFIC_DATA",
+        "pattern": "%{PFSENSE_IPv4_SPECIFIC_DATA}|%{PFSENSE_IPv6_SPECIFIC_DATA}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "57c7e602-9a77-4444-a5ef-674a33a6b004",
+      "data": {
+        "name": "PFSENSE_TCP_DATA",
+        "pattern": "%{INT:src_port},%{INT:dest_port},%{INT:data_length},%{WORD:tcp_flags},%{INT:sequence_number},%{INT:ack_number},%{INT:tcp_window},%{DATA:urg_data},%{GREEDYDATA:tcp_options}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "b23a8ef2-a7fb-45ff-856b-7e741ab69496",
+      "data": {
+        "name": "PFSENSE_ICMP_TSTAMP_REPLY",
+        "pattern": "%{INT:icmp_tstamp_reply_id},%{INT:icmp_tstamp_reply_sequence},%{INT:icmp_tstamp_reply_otime},%{INT:icmp_tstamp_reply_rtime},%{INT:icmp_tstamp_reply_ttime}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.4+279ef2c"
+        }
+      ]
+    }
+  ]
+}
